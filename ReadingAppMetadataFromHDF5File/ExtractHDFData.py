@@ -17,7 +17,7 @@ import sys
 from datetime import datetime as dt
 import pandas as pd
 from tqdm import tqdm
-# import os
+import os
 
 
 def strtodate(x):
@@ -81,22 +81,29 @@ def GenerateDataFromHDF(hf, pathlist, outputfilename=None):
             if col != 'index':
                 appidsdf[col] = appidsdf[col].apply(lambda x: x.decode("utf-8"))
 
-            if col == 'initial_release_date':
-                appidsdf[col] = appidsdf[col].apply(strtodate)
-            z = 20
+            # TODO Uncomment the below code to convert time form string format to dateime format
+            # if col == 'initial_release_date':
+            #     appidsdf[col] = appidsdf[col].apply(strtodate)
 
-        # return the data incrementally
-        yield appidsdf
+        # return the data and path name incrementally
+        yield appidsdf, '_'.join(path.split('/'))
 
 
 
-def ExtractDataFromFile(hdfFile):
+def ExtractDataFromFile(hdfFile, index):
     '''
 
     :param hdfFile: input hdf5 file
     :return: None
     '''
 
+    # Create a folder name index
+    dirname = f'JSON_DIR_{index}'
+
+    try:
+        os.mkdir(dirname)
+    except:
+        print(f"Directory {dirname} already exists.")
     hf = h5py.File(hdfFile, 'r')
 
     # list(hf.keys())  this gives the list of keys within the current key
@@ -125,18 +132,20 @@ def ExtractDataFromFile(hdfFile):
     hdf_data_itunes = GenerateDataFromHDF(hf, itunes_connect_paths, outputfilename='itunes_connect_ids.csv')
 
     # Get the data from generator
-    for hdfdata in hdf_data_itunes:
+    for hdfdata, pathname in hdf_data_itunes:
         # TODO Process data. This data is from one of the path in one hdf5 object
         mydata = hdfdata
+        mydata.to_json(f'./{dirname}/{pathname}.json', orient='records', lines=True)
         pass
 
     # Get the metdata for google_play
     # Create the generator object hdf_data_googleplay
     hdf_data_googleplay = GenerateDataFromHDF(hf, google_play_paths, outputfilename='google_play_ids.csv')
 
-    for hdfdata in hdf_data_googleplay:
+    for hdfdata, pathname in hdf_data_googleplay:
         # TODO Process data. This data is from one of the path in one hdf5 object
         mydata = hdfdata
+        mydata.to_json(f'./{dirname}/{pathname}.json', orient='records', lines=True)
         pass
 
     # End of function
@@ -155,8 +164,8 @@ if __name__ == "__main__":
     #
     # sc = session.sparkContext
 
-    for i in range(1, 1001):
-        filename = f'{datafilepath}ApptopiaStoreV1_1000_{i}.h5'
-        ExtractDataFromFile(filename)
+    for index in range(1, 1001):
+        filename = f'{datafilepath}ApptopiaStoreV1_1000_{index}.h5'
+        ExtractDataFromFile(filename, index)
 
     # End of main function

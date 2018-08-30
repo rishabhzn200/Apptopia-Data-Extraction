@@ -25,7 +25,7 @@ import pandas as pd
 from tqdm import tqdm
 from itertools import zip_longest
 import os
-from ApptopiaAPIV2 import *
+from ApptopiaAPI_V3 import *
 
 
 

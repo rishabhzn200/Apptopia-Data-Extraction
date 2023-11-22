@@ -112,7 +112,7 @@ def GetEstimatesForPartitionWithIndex_Itunes(partition_id, start_date = '2016-11
                     if status != 200:
                         with open('./errorfile.txt', 'a') as f:
                             f.write(
-                                f'\n\n___________________________________________New Error Itunes_Connect___________________________________________\n')
+                                '\n\n___________________________________________New Error Itunes_Connect___________________________________________\n')
                             f.write(f'\nPartition ID = {partition_id}\n')
                             f.write(f'\nID = {val_ids}\tdata = {perfdata}\n\n')
                         time.sleep(1)
@@ -127,7 +127,7 @@ def GetEstimatesForPartitionWithIndex_Itunes(partition_id, start_date = '2016-11
                         else:
                             with open('./errorfile.txt', 'a') as f:
                                 f.write(f'\nID = {val_ids}\tdata = {perfdata}\t\n')
-                                f.write(f'Successfully got the performance data')
+                                f.write('Successfully got the performance data')
 
                         # Write version data once retry is done
                         estimatedata.extend(perfdata)
@@ -193,7 +193,7 @@ def SaveEstimateForRDD(app_estimates_rdd, hdf5storeOutput, hdpath):
             # Log the error
             with open('./errorfile_perf.txt', 'a') as f:
                 f.write(
-                    f'\n\n___________________________________________New Error Itunes_Connect___________________________________________\n')
+                    '\n\n___________________________________________New Error Itunes_Connect___________________________________________\n')
                 f.write(f'\nError ID = {part_id}\n\n')
                 f.write(f'\ndata = {data_from_part_rdd}\n\n')
 

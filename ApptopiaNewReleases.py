@@ -235,9 +235,8 @@ def NewReleaseIds(start_date=None, end_date=None, apptopiastorefile=None):
                 new_release_data = get_new_releases(store=store, start_date=dates[0], end_date=dates[1], country=country, category=catno)
                 new_release_data = new_release_data.replace(":true", ':True')
                 new_release_data = new_release_data.replace(':false', ':False')
-                new_release_data = process_data(new_release_data)
 
-                if new_release_data == []:
+                if (new_release_data := process_data(new_release_data)) == []:
                     continue
                 print('new:- ', new_release_data)
 

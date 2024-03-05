@@ -63,7 +63,7 @@ def GetVersionForPartitionWithIndex_Itunes(partition_id):
                     if status != 200:
                         with open('./errorfile.txt', 'a') as f:
                             f.write(
-                                f'\n\n___________________________________________New Error Itunes_Connect___________________________________________\n')
+                                '\n\n___________________________________________New Error Itunes_Connect___________________________________________\n')
                             f.write(f'\nPartition ID = {partition_id}\n')
                             f.write(f'\nID = {val.id}\tdata = {versiondata}\n\n')
                             # f.write(f'')
@@ -80,7 +80,7 @@ def GetVersionForPartitionWithIndex_Itunes(partition_id):
                         else:
                             with open('./errorfile.txt', 'a') as f:
                                 f.write(f'\nID = {id}\tdata = {versiondata}\t\n')
-                                f.write(f'Successfully got the version data')
+                                f.write('Successfully got the version data')
 
                         # Write version data once retry is done
                         abcd.extend(versiondata)
@@ -116,7 +116,7 @@ def GetVersionForPartitionWithIndex_GooglePlay(partition_id):
                     if status != 200:
                         with open('./errorfile.txt', 'a') as f:
                             f.write(
-                                f'\n\n___________________________________________New Error GooglePlay___________________________________________\n')
+                                '\n\n___________________________________________New Error GooglePlay___________________________________________\n')
                             f.write(f'\nPartition ID = {partition_id}\n')
                             f.write(f'\nID = {val.id}\tdata = {versiondata}\n\n')
                             # f.write(f'')
@@ -133,7 +133,7 @@ def GetVersionForPartitionWithIndex_GooglePlay(partition_id):
                         else:
                             with open('./errorfile.txt', 'a') as f:
                                 f.write(f'\nID = {id}\tdata = {versiondata}\t\n')
-                                f.write(f'Successfully got the version data')
+                                f.write('Successfully got the version data')
 
                         # Write version data once retry is done
                         abcd.extend(versiondata)
@@ -215,7 +215,7 @@ if __name__ == "__main__":
             # Log the error
             with open('./errorfile.txt', 'a') as f:
                 f.write(
-                    f'\n\n___________________________________________New Error Itunes_Connect___________________________________________\n')
+                    '\n\n___________________________________________New Error Itunes_Connect___________________________________________\n')
                 f.write(f'Error ID = {part_id}')
                 f.write(f'data = {data_from_part_rdd}\n')
 

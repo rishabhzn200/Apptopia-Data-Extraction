@@ -130,7 +130,7 @@ if __name__ == "__main__":
         except:
             # Log the error
             with open('./errorfile.txt', 'a') as f:
-                f.write(f'\n\n___________________________________________New Error Itunes_Connect___________________________________________\n')
+                f.write('\n\n___________________________________________New Error Itunes_Connect___________________________________________\n')
                 f.write(f'Error ID = {part_id}')
                 f.write(f'data = {data_from_part_rdd}\n')
 
@@ -158,7 +158,7 @@ if __name__ == "__main__":
             # Log the error
             with open('./errorfile.txt', 'a') as f:
                 f.write(
-                    f'\n\n___________________________________________New Error Google Play___________________________________________\n')
+                    '\n\n___________________________________________New Error Google Play___________________________________________\n')
                 f.write(f'Error ID = {part_id}')
                 f.write(f'data = {data_from_part_rdd}\n')
 
